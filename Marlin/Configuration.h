@@ -20,7 +20,7 @@
  *
  */
 #pragma once
-
+#define NO_USER_FEEDBACK_WARNING
 #define CONFIG_EXAMPLES_DIR "Artillery/Sidewinder X1/V1"
 
 /**
