@@ -1,0 +1,33 @@
+START_PRINT (Cura/PrusaSlicer Compatible)
+---------------------------------------
+G90 ; Absolute positioning
+M117 Heating...
+M140 S[first_layer_bed_temperature] ; Set bed temp (PrusaSlicer) or {material_bed_temperature_layer_0} (Cura)
+M104 S[first_layer_temperature] ; Set hotend temp
+M190 S[first_layer_bed_temperature] ; Wait for bed temp
+M109 S[first_layer_temperature] ; Wait for hotend temp
+G28 ; Home all axes
+G34 ; Z Stepper Auto-Alignment (Dual Z)
+M420 S1 ; Load Bed Mesh (Enable UBL/Bilinear)
+G92 E0 ; Reset Extruder
+G1 Z2.0 F3000 ; Move Z Axis up little to prevent scratching of Heat Bed
+G1 X5.1 Y20 Z0.3 F5000.0 ; Move to start position
+G1 X5.1 Y200.0 Z0.3 F1500.0 E15 ; Draw the first line
+G1 X5.4 Y200.0 Z0.3 F5000.0 ; Move to side a little
+G1 X5.4 Y20 Z0.3 F1500.0 E30 ; Draw the second line
+G92 E0 ; Reset Extruder
+G1 Z2.0 F3000 ; Move Z Axis up little
+
+STOP_PRINT
+----------
+G91 ; Relative positioning
+G1 E-2 F2700 ; Retract a bit
+G1 E-2 Z0.2 F2400 ; Retract and raise Z
+G1 X5 Y5 F3000 ; Wipe out
+G1 Z10 ; Raise Z more
+G90 ; Absolute positioning
+G1 X0 Y300 ; Present print
+M106 S0 ; Turn-off fan
+M104 S0 ; Turn-off hotend
+M140 S0 ; Turn-off bed
+M84 X Y E ; Disable all steppers but Z
